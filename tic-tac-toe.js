@@ -68,7 +68,33 @@ const computerMove = () => {
     })
     //columns
     //top and bottom'
-    if(isFirstTurn == false){
+        if(box11.innerHTML == ""){
+            selectedBox = box11
+        }
+        else if(box13.innerHTML == ""){
+            selectedBox = box13
+        }
+        else if(box31.innerHTML == ""){
+            selectedBox = box31
+        }
+        else if(box33.innerHTML == ""){
+            selectedBox = box33
+        }
+        else if(box22.innerHTML == ""){
+            selectedBox = box22
+        }
+        else if(box12.innerHTML == ""){
+            selectedBox = box12
+        }
+        else if(box21.innerHTML == ""){
+            selectedBox = box21
+        }
+        else if(box32.innerHTML == ""){
+            selectedBox = box32
+        }
+        else if(box23.innerHTML == ""){
+            selectedBox = box23
+        }
         if(box11.innerHTML == "x" && box13.innerHTML == "x"){
             if(box12.innerHTML == "")
             selectedBox = box12
@@ -128,7 +154,7 @@ const computerMove = () => {
         }
         if(box12.innerHTML == "x" && box22.innerHTML =="x"){
             if(box32.innerHTML == "")
-                selectedBox = box12
+                selectedBox = box32
         }
         if(box13.innerHTML == "x" && box23.innerHTML =="x"){
             if(box33.innerHTML == "")
@@ -175,21 +201,7 @@ const computerMove = () => {
             if(box11.innerHTML == "")
                 selectedBox = box11
         }
-    }
-    else{
-        if(box11.innerHTML == ""){
-            selectedBox = box11
-        }
-        else if(box13.innerHTML == ""){
-            selectedBox = box13
-        }
-        else if(box31.innerHTML == ""){
-            selectedBox = box31
-        }
-        else if(box33.innerHTML == ""){
-            selectedBox = box33
-        }
-    }
+    
     populateAndFillComputerBox(selectedBox)
     
 }
