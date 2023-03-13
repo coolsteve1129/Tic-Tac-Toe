@@ -17,20 +17,18 @@ const gameBoard = () => {
             gridBox.style.backgroundColor = 'indigo'
            
             gridBox.addEventListener('click', () => {
-                if (playerTurn == true){
                 gridBox.innerHTML = "x"
                 checkForWinner();
-                playerTurn = false;
                 gridBox.style.color = "#39ff14"                
                 computerMove()   
-                }
-                else
-                {                 
-                    gridBox.innerHTML = "o"
-                    checkForWinner();
-                    playerTurn = true;
-                    gridBox.style.color = "#F72119"
-                }
+                
+                // else
+                // {                 
+                //     gridBox.innerHTML = "o"
+                //     checkForWinner();
+                //     playerTurn = true;
+                //     gridBox.style.color = "#F72119"
+                // }
             });
 
             gridBox.style.fontSize = "50px"
@@ -53,115 +51,151 @@ const computerMove = () => {
     const box31 = document.getElementById('c3r1');
     const box32 = document.getElementById('c3r2');
     const box33 = document.getElementById('c3r3');  
+    let selectedBox = null;
+
+    let boxesWithText = 0;
+    let isFirstTurn = true;
+    
+    const boxes = [box11, box12, box13, box21, box22, box23, box31, box32, box33]
+
+    boxes.forEach(function (box, index){
+        if(boxes[index].innerHTML == "x"){
+            boxesWithText++;
+            if(boxesWithText > 1){
+                isFirstTurn = false;
+            }
+        }
+    })
     //columns
     //top and bottom'
-    if(box11.innerHTML == "x" && box13.innerHTML == "x"){
-        if(box12.innerHTML == "")
-        box12.innerHTML = "o"
+    if(isFirstTurn == false){
+        if(box11.innerHTML == "x" && box13.innerHTML == "x"){
+            if(box12.innerHTML == "")
+            selectedBox = box12
+        }
+        if(box21.innerHTML == "x" && box23.innerHTML == "x"){
+            if(box22.innerHTML == "")
+                selectedBox = box22
+        }
+        if(box31.innerHTML == "x" && box33.innerHTML =="x"){
+            if(box32.innerHTML == "")    
+                selectedBox = box32
+        }
+        //top and second from top
+        if(box11.innerHTML == "x" && box12.innerHTML =="x"){
+            if(box13.innerHTML == "")
+                selectedBox = box13
+        }
+        if(box21.innerHTML == "x" && box22.innerHTML =="x"){
+            if(box23.innerHTML == "")
+                selectedBox = box23
+        }
+        if(box31.innerHTML == "x" && box32.innerHTML =="x"){
+            if(box33.innerHTML == "")
+                selectedBox = box33
+        }
+        //second from bottom and bottom
+        if(box12.innerHTML == "x" && box13.innerHTML =="x"){
+            if(box11.innerHTML == "")
+                selectedBox = box11
+        }
+        if(box22.innerHTML == "x" && box23.innerHTML =="x"){
+            if(box21.innerHTML == "")
+                selectedBox = box21
+        }
+        if(box32.innerHTML == "x" && box33.innerHTML =="x"){
+            if(box31.innerHTML == "")
+            selectedBox = box31
+        }
+        //rows
+        //first and last
+        if(box11.innerHTML == "x" && box31.innerHTML =="x"){
+            if(box21.innerHTML == "")
+                selectedBox = box21
+        }
+        if(box12.innerHTML == "x" && box32.innerHTML =="x"){
+            if(box22.innerHTML == "")
+                selectedBox = box22
+        }
+        if(box13.innerHTML == "x" && box33.innerHTML =="x"){
+            if(box23.innerHTML == "")
+                selectedBox = box23
+        }
+        //first and second
+        if(box11.innerHTML == "x" && box21.innerHTML =="x"){
+            if(box31.innerHTML == "")
+                selectedBox = box31
+        }
+        if(box12.innerHTML == "x" && box22.innerHTML =="x"){
+            if(box32.innerHTML == "")
+                selectedBox = box12
+        }
+        if(box13.innerHTML == "x" && box23.innerHTML =="x"){
+            if(box33.innerHTML == "")
+                selectedBox = box33
+        }
+        //second and last
+        if(box21.innerHTML == "x" && box31.innerHTML =="x"){
+            if(box11.innerHTML == "")
+                selectedBox = box11
+        }
+        if(box22.innerHTML == "x" && box32.innerHTML =="x"){
+            if(box12.innerHTML == "")
+                selectedBox = box12
+        }
+        if(box23.innerHTML == "x" && box33.innerHTML =="x"){
+            if(box13.innerHTML == "")
+                selectedBox = box13
+        }
+        //diagonal
+        //first and last
+        if(box11.innerHTML == "x" && box33.innerHTML =="x"){
+            if(box22.innerHTML == "")
+                selectedBox = box22
+        }
+        if(box13.innerHTML == "x" && box31.innerHTML =="x"){
+            if(box22.innerHTML == "")
+                selectedBox = box22
+        }
+        //first and second
+        if(box11.innerHTML == "x" && box22.innerHTML =="x"){
+            if(box33.innerHTML == "")
+                selectedBox = box33
+        }
+        if(box13.innerHTML == "x" && box22.innerHTML =="x"){
+            if(box31.innerHTML == "")
+                selectedBox = box31 
+        }
+        //second and last
+        if(box22.innerHTML == "x" && box31.innerHTML =="x"){
+            if(box13.innerHTML == "")
+                selectedBox = box13
+        }
+        if(box22.innerHTML == "x" && box33.innerHTML =="x"){
+            if(box11.innerHTML == "")
+                selectedBox = box11
+        }
     }
-     if(box21.innerHTML == "x" && box23.innerHTML == "x"){
-        if(box22.innerHTML == "")
-            box22.innerHTML = "o"
+    else{
+        if(box11.innerHTML == ""){
+            selectedBox = box11
+        }
+        else if(box13.innerHTML == ""){
+            selectedBox = box13
+        }
+        else if(box31.innerHTML == ""){
+            selectedBox = box31
+        }
+        else if(box33.innerHTML == ""){
+            selectedBox = box33
+        }
     }
-     if(box31.innerHTML == "x" && box33.innerHTML =="x"){
-        if(box32.innerHTML == "")    
-        box32.innerHTML = "o"
-    }
-    //top and second from top
-     if(box11.innerHTML == "x" && box12.innerHTML =="x"){
-        if(box13.innerHTML == "")
-            box13.innerHTML = "o"
-    }
-     if(box21.innerHTML == "x" && box22.innerHTML =="x"){
-        if(box23.innerHTML == "")
-        box23.innerHTML = "o"
-    }
-     if(box31.innerHTML == "x" && box32.innerHTML =="x"){
-        if(box33.innerHTML == "")
-        box33.innerHTML = "o"
-    }
-    //second from bottom and bottom
-     if(box12.innerHTML == "x" && box13.innerHTML =="x"){
-        if(box11.innerHTML == "")
-        box11.innerHTML = "o"
-    }
-     if(box22.innerHTML == "x" && box23.innerHTML =="x"){
-        if(box21.innerHTML == "")
-        box21.innerHTML = "o"
-    }
-    if(box32.innerHTML == "x" && box33.innerHTML =="x"){
-        if(box31.innerHTML == "")
-        box31.innerHTML = "o"
-    }
-    //rows
-    //first and last
-    if(box11.innerHTML == "x" && box31.innerHTML =="x"){
-        if(box21.innerHTML == "")
-        box21.innerHTML = "o"
-    }
-    if(box12.innerHTML == "x" && box32.innerHTML =="x"){
-        if(box22.innerHTML == "")
-        box22.innerHTML = "o"
-    }
-    if(box13.innerHTML == "x" && box33.innerHTML =="x"){
-        if(box23.innerHTML == "")
-        box23.innerHTML = "o"
-    }
-    //first and second
-    if(box11.innerHTML == "x" && box21.innerHTML =="x"){
-        if(box31.innerHTML == "")
-        box31.innerHTML = "o"
-    }
-    if(box12.innerHTML == "x" && box22.innerHTML =="x"){
-        if(box32.innerHTML == "")
-        box32.innerHTML = "o"
-    }
-    if(box13.innerHTML == "x" && box23.innerHTML =="x"){
-        if(box33.innerHTML == "")
-        box33.innerHTML = "o"
-    }
-    //second and last
-    if(box21.innerHTML == "x" && box31.innerHTML =="x"){
-        if(box11.innerHTML == "")
-        box11.innerHTML = "o"
-    }
-    if(box22.innerHTML == "x" && box32.innerHTML =="x"){
-        if(box12.innerHTML == "")
-        box12.innerHTML = "o"
-    }
-    if(box23.innerHTML == "x" && box33.innerHTML =="x"){
-        if(box13.innerHTML == "")
-        box13.innerHTML = "o"
-    }
-    //diagonal
-    //first and last
-    if(box11.innerHTML == "x" && box33.innerHTML =="x"){
-        if(box22.innerHTML == "")
-        box22.innerHTML = "o"
-    }
-    if(box13.innerHTML == "x" && box31.innerHTML =="x"){
-        if(box22.innerHTML == "")
-        box22.innerHTML = "o"
-    }
-    //first and second
-    if(box11.innerHTML == "x" && box22.innerHTML =="x"){
-        if(box33.innerHTML == "")
-        box33.innerHTML = "o"
-    }
-    if(box13.innerHTML == "x" && box22.innerHTML =="x"){
-        if(box31.innerHTML == "")
-        box31.innerHTML = "o"
-    }
-    //second and last
-    if(box22.innerHTML == "x" && box31.innerHTML =="x"){
-        if(box13.innerHTML == "")
-        box13.innerHTML = "o"
-    }
-    if(box22.innerHTML == "x" && box33.innerHTML =="x"){
-        if(box11.innerHTML == "")
-        box11.innerHTML = "o"
-    }
-    //NEXT TO DO!!! When there is only one move
+    populateAndFillComputerBox(selectedBox)
+    
+}
+const populateAndFillComputerBox = (box) => {
+    box.innerHTML = "o"
+    box.style.color = "#F72119"
 }
 const checkForWinner = () => {
     let isWinner = false;
