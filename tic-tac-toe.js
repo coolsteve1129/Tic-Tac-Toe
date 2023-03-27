@@ -17,10 +17,15 @@ const gameBoard = () => {
             gridBox.style.backgroundColor = 'indigo'
            
             gridBox.addEventListener('click', () => {
+                if(gridBox.innerHTML == ""){
                 gridBox.innerHTML = "x"
-                checkForWinner();
+                checkForWinner(playerTurn);
+                playerTurn = false
                 gridBox.style.color = "#39ff14"                
-                computerMove()   
+                computerMove()  
+                checkForWinner(playerTurn);
+                playerTurn = true;
+                }
                 
                 // else
                 // {                 
@@ -68,6 +73,9 @@ const computerMove = () => {
     })
     //columns
     //top and bottom'
+
+        
+        
         if(box11.innerHTML == ""){
             selectedBox = box11
         }
@@ -201,6 +209,113 @@ const computerMove = () => {
             if(box11.innerHTML == "")
                 selectedBox = box11
         }
+        //computer tries to win
+        if(box11.innerHTML == "o" && box13.innerHTML == "o"){
+            if(box12.innerHTML == "")
+            selectedBox = box12
+        }
+        if(box21.innerHTML == "o" && box23.innerHTML == "o"){
+            if(box22.innerHTML == "")
+                selectedBox = box22
+        }
+        if(box31.innerHTML == "o" && box33.innerHTML =="o"){
+            if(box32.innerHTML == "")    
+                selectedBox = box32
+        }
+        //top and second from top
+        if(box11.innerHTML == "o" && box12.innerHTML =="o"){
+            if(box13.innerHTML == "")
+                selectedBox = box13
+        }
+        if(box21.innerHTML == "o" && box22.innerHTML =="o"){
+            if(box23.innerHTML == "")
+                selectedBox = box23
+        }
+        if(box31.innerHTML == "o" && box32.innerHTML =="o"){
+            if(box33.innerHTML == "")
+                selectedBox = box33
+        }
+        //second from bottom and bottom
+        if(box12.innerHTML == "o" && box13.innerHTML =="o"){
+            if(box11.innerHTML == "")
+                selectedBox = box11
+        }
+        if(box22.innerHTML == "o" && box23.innerHTML =="o"){
+            if(box21.innerHTML == "")
+                selectedBox = box21
+        }
+        if(box32.innerHTML == "o" && box33.innerHTML =="o"){
+            if(box31.innerHTML == "")
+            selectedBox = box31
+        }
+        //rows
+        //first and last
+        if(box11.innerHTML == "o" && box31.innerHTML =="o"){
+            if(box21.innerHTML == "")
+                selectedBox = box21
+        }
+        if(box12.innerHTML == "o" && box32.innerHTML =="o"){
+            if(box22.innerHTML == "")
+                selectedBox = box22
+        }
+        if(box13.innerHTML == "o" && box33.innerHTML =="o"){
+            if(box23.innerHTML == "")
+                selectedBox = box23
+        }
+        //first and second
+        if(box11.innerHTML == "o" && box21.innerHTML =="o"){
+            if(box31.innerHTML == "")
+                selectedBox = box31
+        }
+        if(box12.innerHTML == "o" && box22.innerHTML =="o"){
+            if(box32.innerHTML == "")
+                selectedBox = box32
+        }
+        if(box13.innerHTML == "o" && box23.innerHTML =="o"){
+            if(box33.innerHTML == "")
+                selectedBox = box33
+        }
+        //second and last
+        if(box21.innerHTML == "o" && box31.innerHTML =="o"){
+            if(box11.innerHTML == "")
+                selectedBox = box11
+        }
+        if(box22.innerHTML == "o" && box32.innerHTML =="o"){
+            if(box12.innerHTML == "")
+                selectedBox = box12
+        }
+        if(box23.innerHTML == "o" && box33.innerHTML =="o"){
+            if(box13.innerHTML == "")
+                selectedBox = box13
+        }
+        //diagonal
+        //first and last
+        if(box11.innerHTML == "o" && box33.innerHTML =="o"){
+            if(box22.innerHTML == "")
+                selectedBox = box22
+        }
+        if(box13.innerHTML == "o" && box31.innerHTML =="o"){
+            if(box22.innerHTML == "")
+                selectedBox = box22
+        }
+        //first and second
+        if(box11.innerHTML == "o" && box22.innerHTML =="o"){
+            if(box33.innerHTML == "")
+                selectedBox = box33
+        }
+        if(box13.innerHTML == "o" && box22.innerHTML =="o"){
+            if(box31.innerHTML == "")
+                selectedBox = box31 
+        }
+        //second and last
+        if(box22.innerHTML == "o" && box31.innerHTML =="o"){
+            if(box13.innerHTML == "")
+                selectedBox = box13
+        }
+        if(box22.innerHTML == "o" && box33.innerHTML =="o"){
+            if(box11.innerHTML == "")
+                selectedBox = box11
+        }
     
     populateAndFillComputerBox(selectedBox)
     
@@ -209,7 +324,7 @@ const populateAndFillComputerBox = (box) => {
     box.innerHTML = "o"
     box.style.color = "#F72119"
 }
-const checkForWinner = () => {
+const checkForWinner = (playerTurn) => {
     let isWinner = false;
     const box11 = document.getElementById('c1r1');
     const box12 = document.getElementById('c1r2');
@@ -254,7 +369,26 @@ const checkForWinner = () => {
         isWinner = true;
     }
     if(isWinner == true){
-        alert("you win")
+        if(playerTurn == true){
+            alert("you win")
+        }
+        else if(box11.innerHTML != "" && box12.innerHTML != "" && box13.innerHTML != "" &&
+        box21.innerHTML != "" && box22.innerHTML != "" && box23.innerHTML != "" &&
+        box31.innerHTML != "" && box32.innerHTML != "" && box33.innerHTML != ""){
+            alert("It's a tie")
+        }
+        else{
+            alert("computer wins")
+        }
+        box11.innerHTML = ""
+        box12.innerHTML = ""
+        box13.innerHTML = ""
+        box21.innerHTML = ""
+        box22.innerHTML = ""
+        box23.innerHTML = ""
+        box31.innerHTML = ""
+        box32.innerHTML = ""
+        box33.innerHTML = ""
     }
 
 }
