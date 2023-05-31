@@ -1,7 +1,9 @@
 const gameBoard = () => {
     const container = document.getElementById('gameBoardContainer');
     const gridLength = 3;
-    let playerTurn = true;   
+    let playerTurn = true;
+    const winMessage = document.createElement('div');
+    winMessage.setAttribute('id', 'winMessage')   
     
     for(let i = 1; i < gridLength+1; i++){
         const column = document.createElement('div');
@@ -42,6 +44,7 @@ const gameBoard = () => {
       
        }
     container.append(column);
+    container.append(winMessage);
 
    }
 }
@@ -370,16 +373,17 @@ const checkForWinner = (playerTurn) => {
     }
     if(isWinner == true){
         if(playerTurn == true){
-            alert("you win")
+            document.getElementById('winMessage').innerHTML = "Player Wins"
         }
         else if(box11.innerHTML != "" && box12.innerHTML != "" && box13.innerHTML != "" &&
         box21.innerHTML != "" && box22.innerHTML != "" && box23.innerHTML != "" &&
         box31.innerHTML != "" && box32.innerHTML != "" && box33.innerHTML != ""){
-            alert("It's a tie")
+            document.getElementById('winMessage').innerHTML = "it's a tie"
         }
         else{
-            alert("computer wins")
+            document.getElementById('winMessage').innerHTML = "computer wins"
         }
+       // setTimeout(() => {
         box11.innerHTML = ""
         box12.innerHTML = ""
         box13.innerHTML = ""
@@ -389,6 +393,8 @@ const checkForWinner = (playerTurn) => {
         box31.innerHTML = ""
         box32.innerHTML = ""
         box33.innerHTML = ""
+      //  }, 2000);
+
     }
 
 }
