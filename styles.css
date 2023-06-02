@@ -7,19 +7,30 @@ body{
     align-content: center; 
     background-color: black;   
 }
+#gameAndMessageContainer{
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  width: 60vw;
+  height: 60vh;
+  min-width: 800px;
+  min-height: 600px;
+  background-color: #8f1661;
+  border-radius: 10px;
+  border: 10px solid #4affb9;
+}
+#winMessage{
+  color: white;
+  text-align:center;
+  font-size: 40px;
+  padding-top: 30px;
+}
 #gameBoardContainer{
     display: grid;
-    height: 90vh;
-    width: 60vw;
-    min-height: 187px;
-    min-width: 187px;
     grid-template-columns: 80px 80px 80px;
     grid-template-rows: 80px 80px 80px;
     justify-content: center;
-    padding-top: 20%;
-    padding-bottom: 0%;
-    background-color: #8f1661;
-    border-radius: 10px;
+    padding-top: 200px;
 }
 .grid-box{
     border: 4px solid cornflowerblue;
@@ -28,6 +39,7 @@ body{
 
 
 h1 {
+  
   color: hsla(0, 0%, 0%, .9);
   font: normal 120px Varela Round, sans-serif;
   height: 140px;
@@ -36,9 +48,10 @@ h1 {
   position: absolute;
   text-align: center;
   text-transform: uppercase;
-  top: 20%;
-  left: auto;
+  top:200px;
+  left: center;
   width: 60vw;
+  min-width: 800px;
   animation: move linear 2000ms infinite;  
 }
 

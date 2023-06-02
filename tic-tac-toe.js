@@ -1,5 +1,6 @@
 const gameBoard = () => {
-    const container = document.getElementById('gameBoardContainer');
+    const gameBoardContainer = document.getElementById('gameBoardContainer');
+    const gameAndMessageContainer = document.getElementById("gameAndMessageContainer")
     const gridLength = 3;
     let playerTurn = true;
     const winMessage = document.createElement('div');
@@ -20,22 +21,23 @@ const gameBoard = () => {
            
             gridBox.addEventListener('click', () => {
                 if(gridBox.innerHTML == ""){
-                gridBox.innerHTML = "x"
-                checkForWinner(playerTurn);
-                playerTurn = false
-                gridBox.style.color = "#39ff14"                
+                gridBox.innerHTML = "x"                
+                gridBox.style.color = "#39ff14" 
+                let isWinner = checkForWinner(playerTurn);
+                if(isWinner){
+                    declareWinner(isWinner, playerTurn);                    
+                }
+                else{
+                playerTurn = false               
                 computerMove()  
-                checkForWinner(playerTurn);
+                isWinner = checkForWinner(playerTurn);
+                if(isWinner){
+                    declareWinner(isWinner, playerTurn);                    
+                }
                 playerTurn = true;
                 }
+                }
                 
-                // else
-                // {                 
-                //     gridBox.innerHTML = "o"
-                //     checkForWinner();
-                //     playerTurn = true;
-                //     gridBox.style.color = "#F72119"
-                // }
             });
 
             gridBox.style.fontSize = "50px"
@@ -43,10 +45,9 @@ const gameBoard = () => {
             column.appendChild(gridBox);
       
        }
-    container.append(column);
-    container.append(winMessage);
-
-   }
+    gameBoardContainer.append(column);
+   }   
+   gameAndMessageContainer.append(winMessage);
 }
 const computerMove = () => {
 
@@ -371,6 +372,18 @@ const checkForWinner = (playerTurn) => {
         if(box31.innerHTML  !== '' && box22.innerHTML  !== '' && box13.innerHTML  !== '')
         isWinner = true;
     }
+    return isWinner;
+}
+function declareWinner(isWinner, playerTurn) {    
+    const box11 = document.getElementById('c1r1');
+    const box12 = document.getElementById('c1r2');
+    const box13 = document.getElementById('c1r3');
+    const box21 = document.getElementById('c2r1');
+    const box22 = document.getElementById('c2r2');
+    const box23 = document.getElementById('c2r3');
+    const box31 = document.getElementById('c3r1');
+    const box32 = document.getElementById('c3r2');
+    const box33 = document.getElementById('c3r3'); 
     if(isWinner == true){
         if(playerTurn == true){
             document.getElementById('winMessage').innerHTML = "Player Wins"
@@ -383,7 +396,7 @@ const checkForWinner = (playerTurn) => {
         else{
             document.getElementById('winMessage').innerHTML = "computer wins"
         }
-       // setTimeout(() => {
+        setTimeout(() => {
         box11.innerHTML = ""
         box12.innerHTML = ""
         box13.innerHTML = ""
@@ -393,7 +406,8 @@ const checkForWinner = (playerTurn) => {
         box31.innerHTML = ""
         box32.innerHTML = ""
         box33.innerHTML = ""
-      //  }, 2000);
+        document.getElementById('winMessage').innerHTML = ""
+        }, 2000);
 
     }
 
